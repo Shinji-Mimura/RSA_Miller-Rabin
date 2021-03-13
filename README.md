@@ -14,3 +14,9 @@ RSA is a relatively slow algorithm. Because of this, it is not commonly used to 
 ## About Miller-Rabin Primality Test
 
 The Miller–Rabin primality test or Rabin–Miller primality test is a probabilistic primality test: an algorithm which determines whether a given number is likely to be prime, similar to the Fermat primality test and the Solovay–Strassen primality test.
+
+# How to Use
+```
+python RSA_calculate.py
+
+```
