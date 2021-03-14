@@ -1,6 +1,12 @@
 from random import randrange # select a random E
 import miller_rabin as miller
 from tabulate import tabulate
+
+def convert_list(lista):
+    text_list = [str(i) for i in lista]
+    result = int("".join(text_list))
+    return result
+
 '''
 Generate The Random Number E
 '''
@@ -36,7 +42,7 @@ def cipher(words,e,n): # get the words and compute the cipher
         aux = chr(letter_cipher)
         encrypted += aux
 
-    return encrypted
+    return encrypted,lista
 
 '''
 Decipher The Plain Text Private Key
@@ -86,10 +92,12 @@ if __name__=='__main__':
     e = generate_E(totient_of_N) # generate E
 
     public_key = (n, e)
-    text_cipher = cipher(text,e,n)
+    text_cipher,number_cipher = cipher(text,e,n)
     d = calculate_private_key(totient_of_N,e)
     original_text = decipher(text_cipher,n,d)
 
-    table = [["Public Keys", public_key], ["Encrypted Message", text_cipher], ["Private Key", d], ["Original Message",original_text]]
+    number_cipher = convert_list(number_cipher)
+
+    table = [["Public Keys", public_key], ["Encrypted Message", number_cipher], ["Private Key", d], ["Original Message",original_text]]
 
     print(tabulate(table,tablefmt="fancy_grid"))
