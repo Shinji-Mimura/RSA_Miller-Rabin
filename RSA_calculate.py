@@ -1,6 +1,6 @@
 from random import randrange # select a random E
-import miller_rabin as miller 
-
+import miller_rabin as miller
+from tabulate import tabulate
 '''
 Generate The Random Number E
 '''
@@ -86,13 +86,10 @@ if __name__=='__main__':
     e = generate_E(totient_of_N) # generate E
 
     public_key = (n, e)
-    print('Your public keys:', public_key)
-
     text_cipher = cipher(text,e,n)
-    print('Your encrypted message:', text_cipher)
-
     d = calculate_private_key(totient_of_N,e)
-    print('Your private key is:', d)
-
     original_text = decipher(text_cipher,n,d)
-    print('your original message:', original_text)
+
+    table = [["Public Keys", public_key], ["Encrypted Message", text_cipher], ["Private Key", d], ["Original Message",original_text]]
+
+    print(tabulate(table,tablefmt="fancy_grid"))
